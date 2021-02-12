@@ -1,0 +1,31 @@
+.profile__editbutton {
+    height: 24px;
+    width: 24px;
+    margin-top: 15px;
+    margin-left: 18px;
+    background-image: url("../../../images/EditButton.png");
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity .2s ease;
+}
+
+.profile__editbutton:hover {
+    opacity: 0.6;
+}
+
+.profile__editbutton:after , .profile__editbutton:focus {
+    outline: none;
+    border: none;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__editbutton {
+        margin-left: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
