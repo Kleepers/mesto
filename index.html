@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesto</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="pages/index.css">
+</head>
+<body>
+    <div class="page">
+
+        <header class="header">
+            <img class="header__logo" src="images/logo.png" alt="логотип">
+        </header>
+
+        <div class="popup">
+            <div class="popup__container">
+                <form class="popup__content">
+                    <button type="reset" class="popup__close"></button>
+                    <p class="popup__heading">Редактировать профиль</p>
+                    <input type="text" placeholder="Жак-Ив Кусто" class="popup__name">
+                    <input type="text" placeholder="Исследователь" class="popup__job">
+                    <button type="submit" class="popup__submit">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+        <main class="content">
+
+            <section class="profile">
+                <img class="profile__avatar" src="images/avatar.png" alt="аватар">
+                <div class="profile__info">
+                    <div class="profile__nickname">
+                        <p class="profile__name">Жак-Ив Кусто</p>
+                        <button type="button" class="profile__editbutton"></button>
+                    </div>
+                    <p class="profile__job">Исследователь океана</p>
+                </div>
+                <button type="button" class="profile__addbutton"></button>
+            </section>
+
+            <section class="elements">
+                <div class="element">
+                    <img src="images/dombai.png" alt="Домбай" class="element__photo">
+                    <div class="element__info">
+                        <p class="element__title">Домбай</p>
+                        <button class="element__button"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="images/elbrus.png" alt="Эльбрус" class="element__photo">
+                    <div class="element__info">
+                        <p class="element__title">Гора Эльбрус</p>
+                        <button class="element__button"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="images/karachaevsk.png" alt="Карачаевск" class="element__photo">
+                    <div class="element__info">
+                        <p class="element__title">Карачаевск</p>
+                        <button class="element__button"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="images/dombai.png" alt="Домбай" class="element__photo">
+                    <div class="element__info">
+                        <p class="element__title">Домбай</p>
+                        <button class="element__button"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="images/elbrus.png" alt="Эльбрус" class="element__photo">
+                    <div class="element__info">
+                        <p class="element__title">Гора Эльбрус</p>
+                        <button class="element__button"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="images/karachaevsk.png" alt="Карачаевск" class="element__photo">
+                    <div class="element__info">
+                        <p class="element__title">Карачаевск</p>
+                        <button class="element__button"></button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+
+        <footer class="footer">
+            <p class="footer__copyright">© 2020 Mesto Russia</p>
+        </footer>
+
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

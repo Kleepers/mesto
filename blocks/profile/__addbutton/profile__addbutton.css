@@ -1,0 +1,30 @@
+.profile__addbutton {
+    width: 150px;
+    height: 50px;
+    align-self: center;
+    margin-left: auto;
+    transition: opacity .2s ease;
+    background-image: url("../../../images/AddButton.png");
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: black;
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile__addbutton:hover {
+    opacity: 0.6;
+}
+
+.profile__addbutton:after , .profile__addbutton:focus {
+    outline: none;
+    border: none;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__addbutton {
+        margin-left: 0;
+    }
+}

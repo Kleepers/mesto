@@ -1,0 +1,12 @@
+.profile__nickname {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__nickname {
+        justify-content: center;
+    }
+}
