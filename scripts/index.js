@@ -37,33 +37,6 @@ const popupPhotoClose = popupPhotoForm.querySelector('.popup__close_place_photo'
 
 /* photo popup */
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
 /* Общее открытие попап */
 function togglePopup (popup) {
     popup.classList.toggle('popup_opened');
@@ -98,17 +71,15 @@ function deleteCard(evt) {
     targetCard.remove();
 }
 /*Открыть фотографию*/
-function openPhotoPopup(evt) {
-    const targetElement = evt.target;
-    const targetTitle = targetElement.nextElementSibling;
+function openPhotoPopup(card) {
+    popupImage.src = card.link;
+    popupImage.alt = card.name;
 
-    popupImage.src = targetElement.src;
-
-    popupPlace.textContent = targetTitle.textContent;
+    popupPlace.textContent = card.name;
 
     togglePopup(photoPopup);
-
 }
+
 /*Функция создания карточки,принимает данные с изначального массива/при добавлении карточки в popupAddSubmit*/
 function createElement(card) {
     const element = elementTemplate.content.cloneNode(true);
@@ -119,12 +90,14 @@ function createElement(card) {
 
     elementTitle.textContent = card.name;
     elementPhoto.src = card.link;
+    elementPhoto.alt = card.name;
+
 
     elementLike.addEventListener('click',likeCard);
 
     elementDelete.addEventListener('click',deleteCard);
 
-    elementPhoto.addEventListener('click', openPhotoPopup);
+    elementPhoto.addEventListener('click', () => openPhotoPopup({name:card.name,link:card.link}));
 
     return element;
 }
