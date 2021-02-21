@@ -64,18 +64,19 @@ const initialCards = [
     }
 ];
 
-
+/* Общее открытие попап */
 function togglePopup (popup) {
     popup.classList.toggle('popup_opened');
 }
 
+/*Открыть редактор профиля */
 function openEditPopup () {
     inputName.value = profileName.textContent;
     inputJob.value = profileJob.textContent;
     togglePopup(popupEdit);
 }
 
-
+/*Подтвердить изменения профиля */
 function popupEditSubmit (evt) {
     evt.preventDefault();
 
@@ -84,28 +85,19 @@ function popupEditSubmit (evt) {
 
     togglePopup(popupEdit);
 }
-
-function popupAddSubmit (evt) {
-    evt.preventDefault();
-
-    elements.prepend(createElement({name: inputPlace.value, link: inputPhoto.value}));
-
-
-    togglePopup(popupAdd);
-}
-
+/*Поставить лайк карточке */
 function likeCard(evt) {
     const targetElement = evt.target;
     targetElement.classList.toggle('element__like-btn_active');
 
 }
-
+/*Удалить карточку */
 function deleteCard(evt) {
     const targetElement = evt.target;
     const targetCard = targetElement.closest('.element');
     targetCard.remove();
 }
-
+/*Открыть фотографию*/
 function openPhotoPopup(evt) {
     const targetElement = evt.target;
     const targetTitle = targetElement.nextElementSibling;
@@ -117,7 +109,7 @@ function openPhotoPopup(evt) {
     togglePopup(photoPopup);
 
 }
-
+/*Функция создания карточки,принимает данные с изначального массива/при добавлении карточки в popupAddSubmit*/
 function createElement(card) {
     const element = elementTemplate.content.cloneNode(true);
     const elementTitle = element.querySelector('.element__title');
@@ -137,6 +129,16 @@ function createElement(card) {
     return element;
 }
 
+/*Подтвердить добавление карточки */
+function popupAddSubmit (evt) {
+    evt.preventDefault();
+
+    elements.prepend(createElement({name: inputPlace.value, link: inputPhoto.value}));
+
+
+    togglePopup(popupAdd);
+}
+/* рендер карточек из InitialCards */
 function renderInitialCards() {
     const cards = initialCards.map(createElement);
 
