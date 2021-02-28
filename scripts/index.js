@@ -11,7 +11,7 @@ const profileJob = profile.querySelector('.profile__description');
 
 const inputName = popupEditForm.querySelector('.popup__input_value_name');
 const inputInfo = popupEditForm.querySelector('.popup__input_value_info');
-const popupEditSubmitBtn = popupEdit.querySelector('.popup__submit_place_edit');
+const popupEditSubmitBtn = popupEditForm.querySelector('.popup__submit_place_edit');
 /* Edit popup */
 
 /* Add popup */
@@ -68,12 +68,18 @@ function togglePopup (popup) {
 
 /*Открыть редактор профиля */
 function openEditPopup () {
+    setProfileInputs();
+    popupEditSubmitBtn.removeAttribute('disabled');
+    popupEditSubmitBtn.classList.remove('popup__submit_disabled');
     togglePopup(popupEdit);
 }
 
 function openAddPopup () {
     inputPlace.value = '';
     inputPhoto.value = '';
+
+    popupAddSubmitBtn.setAttribute('disabled', 'disabled');
+    popupAddSubmitBtn.classList.add('popup__submit_disabled');
 
     togglePopup(popupAdd);
 }
