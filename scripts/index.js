@@ -11,6 +11,7 @@ const profileJob = profile.querySelector('.profile__description');
 
 const inputName = popupEditForm.querySelector('.popup__input_value_name');
 const inputInfo = popupEditForm.querySelector('.popup__input_value_info');
+const popupEditSubmitBtn = popupEdit.querySelector('.popup__submit_place_edit');
 /* Edit popup */
 
 /* Add popup */
@@ -24,6 +25,7 @@ const elementTemplate = document.querySelector('#element');
 
 const inputPlace = popupAddForm.querySelector('.popup__input_value_place');
 const inputPhoto = popupAddForm.querySelector('.popup__input_value_image');
+const popupAddSubmitBtn = popupAdd.querySelector('.popup__submit_place_add');
 /* Add popup */
 
 /* photo popup */
@@ -47,7 +49,7 @@ const popups = document.querySelectorAll('.popup')
 
 /* функция добавляющая слушатели на клик по оверлею */
 popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
+    popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup_opened')) {
             togglePopup(popup);
         }
@@ -66,8 +68,14 @@ function togglePopup (popup) {
 
 /*Открыть редактор профиля */
 function openEditPopup () {
-    setProfileInputs();
     togglePopup(popupEdit);
+}
+
+function openAddPopup () {
+    inputPlace.value = '';
+    inputPhoto.value = '';
+
+    togglePopup(popupAdd);
 }
 
 /*Подтвердить изменения профиля */
@@ -132,6 +140,7 @@ function popupAddSubmit (evt) {
     togglePopup(popupAdd);
 
 }
+
 /* функция закрытия попап при клике на esc */
 function escClose(evt) {
     if (evt.key === 'Escape') {
@@ -153,7 +162,7 @@ popupEditForm.addEventListener('submit',popupEditSubmit);
 
 profileEditButton.addEventListener('click',openEditPopup);
 
-profileAddButton.addEventListener('click', () => {togglePopup(popupAdd)});
+profileAddButton.addEventListener('click', openAddPopup);
 
 popupEditClose.addEventListener('click', () => {togglePopup(popupEdit)});
 

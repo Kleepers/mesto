@@ -29,7 +29,6 @@ const isValid = (formElement, inputElement, validationSettings) => {
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
         /* функция из index,присваивает значения input из profile */
-        setProfileInputs();
         return !inputElement.validity.valid;
     })
 };
@@ -58,7 +57,16 @@ const setEventListeners = (formElement, validationSettings) => {
             toggleButtonState(inputList, buttonElement, validationSettings);
         });
     });
+
+    const openButtons = document.querySelectorAll('.profile__popup-btn');
+    openButtons.forEach((openButton) => {
+        openButton.addEventListener('click', () => {
+            setProfileInputs();
+            toggleButtonState(inputList,buttonElement, validationSettings);
+        });
+    })
 };
+
 
 const enableValidation = (validationSettings) => {
     const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
