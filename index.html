@@ -23,7 +23,7 @@
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__edit-btn"></button>
                     </div>
-                    <h2 class="profile__job">Исследователь океана</h2>
+                    <h2 class="profile__description">Исследователь океана</h2>
                 </div>
                 <button type="button" class="profile__add-btn"></button>
             </section>
@@ -40,37 +40,35 @@
         </footer>
 
         <div class="popup popup_area_edit">
-            <div class="popup__container">
-                <form class="popup__content" name="Profile">
-                    <button type="reset" class="popup__close popup__close_place_edit" aria-label="Close"></button>
-                    <h2 class="popup__heading">Редактировать профиль</h2>
-                    <input type="text" placeholder="Ваше имя" class="popup__input popup__input_value_name" name="Name" required>
-                    <input type="text" placeholder="Ваша специальность" class="popup__input popup__input_value_job" name="Job" required>
-                    <button type="submit" class="popup__submit popup__submit_place_edit">Сохранить</button>
-                </form>
-            </div>
+            <form class="popup__content popup__validation" name="Profile" novalidate>
+                <button type="reset" class="popup__close popup__close_place_edit" aria-label="Close"></button>
+                <h2 class="popup__heading">Редактировать профиль</h2>
+                <input type="text" placeholder="Ваше имя" id="popup__name" class="popup__input popup__input_value_name" name="Name" required minlength="2" maxlength="40">
+                <span class="popup__input-error popup__name-error"></span>
+                <input type="text" placeholder="О себе" id="popup__info" class="popup__input popup__input_value_info" name="Info" required minlength="2" maxlength="200">
+                <span class="popup__input-error popup__info-error"></span>
+                <button type="submit" class="popup__submit popup__submit_place_edit">Сохранить</button>
+            </form>
         </div>
 
         <div class="popup popup_area_add">
-            <div class="popup__container">
-                <form class="popup__content" name="Add_element">
-                    <button type="reset" class="popup__close popup__close_place_add" aria-label="Close"></button>
-                    <h2 class="popup__heading">Новое место</h2>
-                    <input type="text" placeholder="Название" class="popup__input popup__input_value_place" name="place" required>
-                    <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_value_image" name="image" required>
-                    <button type="submit" class="popup__submit popup__submit_place_add">Создать</button>
-                </form>
-            </div>
+            <form class="popup__content popup__validation" name="Add_element" novalidate>
+                <button type="reset" class="popup__close popup__close_place_add" aria-label="Close"></button>
+                <h2 class="popup__heading">Новое место</h2>
+                <input type="text" placeholder="Название" id="popup__place" class="popup__input popup__input_value_place" name="place" required minlength="2" maxlength="30">
+                <span class="popup__input-error popup__place-error"></span>
+                <input type="url" placeholder="Ссылка на картинку" id="popup__image" class="popup__input popup__input_value_image" name="image" required>
+                <span class="popup__input-error popup__image-error"></span>
+                <button type="submit" class="popup__submit popup__submit_place_add">Создать</button>
+            </form>
         </div>
 
         <div class="popup popup_area_photo">
-            <div class="popup__container">
-                <form name="Photo" class="popup__content popup__content_place_photo">
-                    <button type="button" aria-label="Закрыть попап" class="popup__close popup__close_place_photo"></button>
-                    <img src="#" alt="Ваша картинка" class="popup__photo">
-                    <h2 class="popup__heading popup__heading_place_photo">Картинка</h2>
-                </form>
-            </div>
+            <form name="Photo" class="popup__content popup__content_place_photo" novalidate>
+                <button type="button" aria-label="Закрыть попап" class="popup__close popup__close_place_photo"></button>
+                <img src="#" alt="Ваша картинка" class="popup__photo">
+                <h2 class="popup__heading popup__heading_place_photo">Картинка</h2>
+            </form>
         </div>
 
         <template id="element">
@@ -87,5 +85,6 @@
     </div>
     <script src="scripts/InitialCards.js"></script>
     <script src="scripts/index.js"></script>
+    <script src="scripts/validate.js"></script>
 </body>
 </html>

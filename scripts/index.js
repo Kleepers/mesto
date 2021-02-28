@@ -7,10 +7,10 @@ const profileEditButton = profile.querySelector('.profile__edit-btn');
 const popupEditClose = popupEditForm.querySelector('.popup__close_place_edit');
 
 const profileName = profile.querySelector('.profile__name');
-const profileJob = profile.querySelector('.profile__job');
+const profileJob = profile.querySelector('.profile__description');
 
 const inputName = popupEditForm.querySelector('.popup__input_value_name');
-const inputJob = popupEditForm.querySelector('.popup__input_value_job');
+const inputInfo = popupEditForm.querySelector('.popup__input_value_info');
 /* Edit popup */
 
 /* Add popup */
@@ -37,15 +37,36 @@ const popupPhotoClose = popupPhotoForm.querySelector('.popup__close_place_photo'
 
 /* photo popup */
 
+/* вносим значения в input (для фикса disabled кнопки при открытии editPopup,используется 1 раз в validate)*/
+function setProfileInputs() {
+    inputName.value = profileName.textContent;
+    inputInfo.value = profileJob.textContent;
+}
+
+const popups = document.querySelectorAll('.popup')
+
+/* функция добавляющая слушатели на клик по оверлею */
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            togglePopup(popup);
+        }
+    })
+})
+
 /* Общее открытие попап */
 function togglePopup (popup) {
     popup.classList.toggle('popup_opened');
+    if (popup.classList.contains('popup_opened')) {
+        document.addEventListener('keyup', escClose);
+    } else {
+        document.removeEventListener('keyup',escClose);
+    }
 }
 
 /*Открыть редактор профиля */
 function openEditPopup () {
-    inputName.value = profileName.textContent;
-    inputJob.value = profileJob.textContent;
+    setProfileInputs();
     togglePopup(popupEdit);
 }
 
@@ -54,7 +75,7 @@ function popupEditSubmit (evt) {
     evt.preventDefault();
 
     profileName.textContent = inputName.value;
-    profileJob.textContent = inputJob.value;
+    profileJob.textContent = inputInfo.value;
 
     togglePopup(popupEdit);
 }
@@ -108,9 +129,17 @@ function popupAddSubmit (evt) {
 
     elements.prepend(createElement({name: inputPlace.value, link: inputPhoto.value}));
 
-
     togglePopup(popupAdd);
+
 }
+/* функция закрытия попап при клике на esc */
+function escClose(evt) {
+    if (evt.key === 'Escape') {
+        const currentPopup = document.querySelector('.popup_opened');
+        togglePopup(currentPopup);
+    }
+}
+
 /* рендер карточек из InitialCards */
 function renderInitialCards() {
     const cards = initialCards.map(createElement);
@@ -119,7 +148,6 @@ function renderInitialCards() {
 }
 
 renderInitialCards();
-
 
 popupEditForm.addEventListener('submit',popupEditSubmit);
 
@@ -134,6 +162,7 @@ popupAddClose.addEventListener('click', () => {togglePopup(popupAdd)});
 popupAddForm.addEventListener('submit',popupAddSubmit);
 
 popupPhotoClose.addEventListener('click', () => {togglePopup(photoPopup)});
+
 
 
 
