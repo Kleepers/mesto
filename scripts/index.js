@@ -1,3 +1,8 @@
+import {initialCards} from './InitialCards.js';
+import Card from './Card.js';
+import {ValidationSettings} from "./ValidationSettings.js";
+import FormValidator from "./FormValidator.js";
+
 /* Edit popup */
 const popupEdit = document.querySelector('.popup_area_edit');
 const popupEditForm = popupEdit.querySelector('.popup__content');
@@ -21,7 +26,7 @@ const elements = document.querySelector('.elements');
 
 const profileAddButton = profile.querySelector('.profile__add-btn');
 const popupAddClose = popupAdd.querySelector('.popup__close_place_add');
-const elementTemplate = document.querySelector('#element');
+const elementTemplate = '.card';
 
 const inputPlace = popupAddForm.querySelector('.popup__input_value_place');
 const inputPhoto = popupAddForm.querySelector('.popup__input_value_image');
@@ -33,13 +38,16 @@ const popupAddSubmitBtn = popupAdd.querySelector('.popup__submit_place_add');
 const photoPopup = document.querySelector('.popup_area_photo');
 const popupPhotoForm = photoPopup.querySelector('.popup__content');
 
-const popupImage = popupPhotoForm.querySelector('.popup__photo');
-const popupPlace = popupPhotoForm.querySelector('.popup__heading');
 const popupPhotoClose = popupPhotoForm.querySelector('.popup__close_place_photo');
 
 /* photo popup */
 
-/* вносим значения в input (для фикса disabled кнопки при открытии editPopup,используется 1 раз в validate)*/
+const formValidatorAdd = new FormValidator(ValidationSettings,popupAddForm);
+
+const formValidatorEdit = new FormValidator(ValidationSettings,popupEditForm);
+
+/* вносим значения в input */
+
 function setProfileInputs() {
     inputName.value = profileName.textContent;
     inputInfo.value = profileJob.textContent;
@@ -57,7 +65,7 @@ popups.forEach((popup) => {
 })
 
 /* Общее открытие попап */
-function togglePopup (popup) {
+export function togglePopup (popup) {
     popup.classList.toggle('popup_opened');
     if (popup.classList.contains('popup_opened')) {
         document.addEventListener('keyup', escClose);
@@ -93,58 +101,22 @@ function popupEditSubmit (evt) {
 
     togglePopup(popupEdit);
 }
-/*Поставить лайк карточке */
-function likeCard(evt) {
-    const targetElement = evt.target;
-    targetElement.classList.toggle('element__like-btn_active');
-
-}
-/*Удалить карточку */
-function deleteCard(evt) {
-    const targetElement = evt.target;
-    const targetCard = targetElement.closest('.element');
-    targetCard.remove();
-}
-/*Открыть фотографию*/
-function openPhotoPopup(card) {
-    popupImage.src = card.link;
-    popupImage.alt = card.name;
-
-    popupPlace.textContent = card.name;
-
-    togglePopup(photoPopup);
-}
-
-/*Функция создания карточки,принимает данные с изначального массива/при добавлении карточки в popupAddSubmit*/
-function createElement(card) {
-    const element = elementTemplate.content.cloneNode(true);
-    const elementTitle = element.querySelector('.element__title');
-    const elementPhoto = element.querySelector('.element__photo');
-    const elementLike = element.querySelector('.element__like-btn');
-    const elementDelete = element.querySelector('.element__delete-btn');
-
-    elementTitle.textContent = card.name;
-    elementPhoto.src = card.link;
-    elementPhoto.alt = card.name;
-
-
-    elementLike.addEventListener('click',likeCard);
-
-    elementDelete.addEventListener('click',deleteCard);
-
-    elementPhoto.addEventListener('click', () => openPhotoPopup({name:card.name,link:card.link}));
-
-    return element;
-}
 
 /*Подтвердить добавление карточки */
-function popupAddSubmit (evt) {
+function  popupAddSubmit (evt) {
     evt.preventDefault();
 
-    elements.prepend(createElement({name: inputPlace.value, link: inputPhoto.value}));
+    addNewCard();
 
     togglePopup(popupAdd);
 
+}
+
+function addNewCard () {
+    const newCard = new Card({name: inputPlace.value, link: inputPhoto.value},elementTemplate);
+    const cardElement = newCard.generateCard();
+
+    elements.prepend(cardElement);
 }
 
 /* функция закрытия попап при клике на esc */
@@ -155,14 +127,17 @@ function escClose(evt) {
     }
 }
 
-/* рендер карточек из InitialCards */
-function renderInitialCards() {
-    const cards = initialCards.map(createElement);
+/*Функция создания карточки,принимает данные с изначального массива/при добавлении карточки в popupAddSubmit*/
 
-    elements.append(...cards);
-}
+initialCards.forEach((item) => {
+    const card = new Card(item, elementTemplate);
+    const cardElement = card.generateCard();
 
-renderInitialCards();
+    elements.append(cardElement);
+});
+
+formValidatorAdd.enableValidation();
+formValidatorEdit.enableValidation();
 
 popupEditForm.addEventListener('submit',popupEditSubmit);
 

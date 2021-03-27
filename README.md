@@ -10,8 +10,6 @@ Mesto: интерактивная страница, куда можно доба
 
 *Javascript*
 
-*DOM*
-
 *CSS Flex*
 
 *CSS Grid*
