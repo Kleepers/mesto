@@ -1,7 +1,21 @@
 import './index.css';
 import {initialCards} from '../scripts/utils/InitialCards.js';
-import {ValidationSettings} from "../scripts/utils/ValidationSettings.js";
-import {formCards,formProfile, inputInfo,inputName,openPopupCards,openPopupProfile,cardPlace} from "../scripts/utils/constants.js";
+import {validationSettings} from "../scripts/utils/validationSettings.js";
+import {
+    cardPlaceSelector,
+    formCards,
+    formProfile,
+    inputInfo,
+    inputName,
+    openPopupCards,
+    openPopupProfile,
+    cardPlace,
+    popupPhotoSelector,
+    profileDescSelector,
+    profileNameSelector,
+    cardSelector,
+    popupProfileSelector, popupCardsSelector
+} from "../scripts/utils/constants.js";
 // классы
 
 import Card from '../scripts/components/Card.js';
@@ -13,10 +27,10 @@ import UserInfo from "../scripts/components/UserInfo.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 
-const userInfo = new UserInfo({userName: '.profile__name',userInfo: '.profile__description'});
-const popupWithImage = new PopupWithImage('.popup_area_photo');
-const formValidatorProfile = new FormValidator(ValidationSettings, formProfile);
-const formValidatorCards = new FormValidator(ValidationSettings, formCards);
+const userInfo = new UserInfo({userName: profileNameSelector,userInfo: profileDescSelector});
+const popupWithImage = new PopupWithImage(popupPhotoSelector);
+const formValidatorProfile = new FormValidator(validationSettings, formProfile);
+const formValidatorCards = new FormValidator(validationSettings, formCards);
 
 function handleCardClick(link, text) {
     popupWithImage.open(link, text);
@@ -30,27 +44,30 @@ function setProfileInputs() {
     inputInfo.value = user.userInfo;
 }
 
+function createCard (item) {
+    const card = new Card(item, cardSelector, handleCardClick);
+    return card.generateCard();
+}
+
 const cards = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, '.card', handleCardClick);
-        const cardElement = card.generateCard();
+        const cardElement = createCard(item);
         cards.addItem(cardElement);
     }
-}, '.elements');
+}, cardPlaceSelector);
 
 const popupWithFormProfile = new PopupWithForm({
-    popupSelector: '.popup_area_edit',
+    popupSelector: popupProfileSelector,
     handleFormSubmit: (formData) => {
         userInfo.setUserInfo({userName: formData.name, userInfo: formData.info});
     }
 })
 
 const popupWithFormCards = new PopupWithForm({
-    popupSelector: '.popup_area_add',
+    popupSelector: popupCardsSelector,
     handleFormSubmit: (formData) => {
-        const additionalCard = new Card ({name: formData.place, link: formData.image}, '.card',handleCardClick);
-        const cardElement = additionalCard.generateCard();
+        const cardElement = createCard({name: formData.place, link: formData.image});
         cardPlace.prepend(cardElement);
     }
 })
