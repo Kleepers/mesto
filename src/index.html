@@ -16,13 +16,16 @@
     <main class="content">
 
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="аватар">
+            <div class="profile__avatar">
+                <button class="profile__edit-avatar"></button>
+                <div class="profile__avatar-overlay"></div>
+            </div>
             <div class="profile__info">
                 <div class="profile__nickname">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name"></h1>
                     <button type="button" class="profile__edit-btn profile__popup-btn"></button>
                 </div>
-                <h2 class="profile__description">Исследователь океана</h2>
+                <h2 class="profile__description"></h2>
             </div>
             <button type="button" class="profile__add-btn profile__popup-btn"></button>
         </section>
@@ -70,13 +73,37 @@
         </form>
     </div>
 
+    <div class="popup popup_area_avatar">
+        <form class="popup__content popup__content_place_avatar popup__validation">
+            <button type="reset" class="popup__close popup__close_place_avatar" aria-label="Close"></button>
+            <h2 class="popup__heading">Обновить аватар</h2>
+            <input class="popup__input popup__input_value_avatar" type="url" placeholder="Ссылка на картинку" id="popup__avatar" name="avatar" required>
+            <span class="popup__input-error popup__avatar-error"></span>
+            <button type="submit" class="popup__submit popup__submit_place_avatar">Сохранить</button>
+        </form>
+    </div>
+
+    <div class="popup popup_area_delete">
+        <form class="popup__content popup__content_place_delete popup__validation">
+            <button type="reset" class="popup__close popup__close_place_delete" aria-label="Close"></button>
+            <h2 class="popup__heading">Вы уверены?</h2>
+            <button type="submit" class="popup__submit popup__submit_place_delete">Да</button>
+        </form>
+    </div>
+
+
+
     <template class="card">
         <article class="element">
             <button aria-label="Удалить" class="element__delete-btn"></button>
             <img src="#" alt="Карачаевск" class="element__photo">
             <div class="element__info">
                 <h3 class="element__title">Карачаевск</h3>
-                <button type="button" aria-label="Нравится" class="element__like-btn"></button>
+                <div class="element__like">
+                    <button type="button" aria-label="Нравится" class="element__like-btn"></button>
+                    <p class="element__like-count"></p>
+                </div>
+
             </div>
         </article>
     </template>

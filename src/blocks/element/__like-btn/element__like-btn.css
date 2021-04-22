@@ -1,7 +1,6 @@
 .element__like-btn {
     width: 22px;
     height: 19px;
-    margin-right: 20px;
     align-self: center;
     transition: opacity .1s ease;
     background-color: transparent;
