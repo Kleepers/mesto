@@ -8,7 +8,6 @@ const inputName = formProfile.querySelector('.popup__input_value_name');
 const inputInfo = formProfile.querySelector('.popup__input_value_info');
 const openPopupProfile = document.querySelector('.profile__edit-btn');
 const openPopupCards = document.querySelector('.profile__add-btn');
-const cardPlace = document.querySelector('.elements');
 const profileAvatar = document.querySelector('.profile__avatar');
 const profileAvatarSelector = '.profile__avatar';
 const popupPhotoSelector = '.popup_area_photo';
@@ -25,7 +24,15 @@ const popupCardsButton = popupCards.querySelector('.popup__submit');
 const popupProfileButton = popupProfile.querySelector('.popup__submit');
 const popupAvatarButton = popupAvatar.querySelector('.popup__submit');
 
+const apiConfig = {
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+    headers: {
+        authorization: 'f2168467-af30-4c44-aa31-04a8fed6c871',
+        'Content-Type': 'application/json'
+    }
+}
 
 
 
-export {popupCardsButton,popupProfileButton,popupAvatarButton,popupDeleteSelector,profileAvatarSelector,profileAvatar,popupAvatarSelector,formAvatar,cardPlaceSelector,popupCardsSelector,popupProfileSelector,inputName, inputInfo, openPopupCards,openPopupProfile,cardPlace,formProfile,formCards,popupPhotoSelector,profileNameSelector,profileDescSelector,cardSelector};
+
+export {apiConfig,popupCardsButton,popupProfileButton,popupAvatarButton,popupDeleteSelector,profileAvatarSelector,profileAvatar,popupAvatarSelector,formAvatar,cardPlaceSelector,popupCardsSelector,popupProfileSelector,inputName, inputInfo, openPopupCards,openPopupProfile,formProfile,formCards,popupPhotoSelector,profileNameSelector,profileDescSelector,cardSelector};

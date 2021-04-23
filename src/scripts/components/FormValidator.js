@@ -61,13 +61,9 @@ export default class FormValidator {
 
     clearErrors() {
         this._inputList.forEach((inputElement) => {
-            const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-            inputElement.classList.remove(this._validationSettings.inputErrorClass);
-            errorElement.classList.remove(this._validationSettings.errorClass);
-            errorElement.textContent = '';
-            //fix button state
-            this._toggleButtonState();
+            this._hideInputError(inputElement);
         });
+        this._toggleButtonState();
     };
 
     enableValidation () {

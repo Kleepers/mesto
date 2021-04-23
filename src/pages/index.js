@@ -8,7 +8,6 @@ import {
     inputName,
     openPopupCards,
     openPopupProfile,
-    cardPlace,
     popupPhotoSelector,
     profileDescSelector,
     profileNameSelector,
@@ -23,6 +22,7 @@ import {
     popupProfileButton,
     popupAvatarButton,
     popupCardsButton,
+    apiConfig
 } from "../scripts/utils/constants.js";
 // классы
 
@@ -41,7 +41,7 @@ const popupWithImage = new PopupWithImage(popupPhotoSelector);
 const formValidatorProfile = new FormValidator(validationSettings, formProfile);
 const formValidatorCards = new FormValidator(validationSettings, formCards);
 const formValidatorAvatar = new FormValidator(validationSettings,formAvatar);
-const api = new Api();
+const api = new Api(apiConfig);
 
 let userId = null;
 
@@ -104,7 +104,7 @@ const popupWithFormCards = new PopupWithForm({
                         owner: result.owner,
                         _id: result._id
                     });
-                    cardPlace.prepend(cardElement);
+                    elements.addNewItem(cardElement);
                 })
                 popupWithFormCards.close();
                 popupCardsButton.textContent = 'Создать';
@@ -117,10 +117,9 @@ const popupWithFormCards = new PopupWithForm({
 
 function handleDeleteIconClick (card) {
     popupWithFormDelete.handleFormSubmit = () => {
-        api.deleteCard(card._id)
+        api.deleteCard(card.id())
             .then(() => {
-                this._element.remove();
-                this._element = null;
+                card.deleteCard();
                 popupWithFormDelete.close();
             })
             .catch(err => console.log(`При удалении карточки ${err}`))
@@ -152,6 +151,13 @@ const popupWithFormAvatar = new PopupWithForm({
 }
 })
 
+const elements = new Section({
+    renderer: (item) => {
+        const cardElement = createCard(item);
+        elements.addItem(cardElement);
+    }
+}, cardPlaceSelector)
+
 Promise.all([api.getInitialCards(),api.getUserInfoApi()])
     .then(([cards,userData]) => {
         userId = userData._id;
@@ -162,14 +168,7 @@ Promise.all([api.getInitialCards(),api.getUserInfoApi()])
         userInfo.setUserAvatar({
             userAvatar: userData.avatar
         });
-        const elements = new Section({
-            items: cards,
-            renderer: (item) => {
-                const cardElement = createCard(item);
-                elements.addItem(cardElement);
-            }
-        }, cardPlaceSelector)
-        elements.renderItems();
+        elements.renderItems(cards);
     })
     .catch(err => console.log(`Ошибка загрузки данных: ${err}`))
 
@@ -184,6 +183,7 @@ formValidatorCards.enableValidation();
 formValidatorAvatar.enableValidation();
 
 profileAvatar.addEventListener('click', () => {
+    formValidatorAvatar.clearErrors()
     popupWithFormAvatar.open();
 })
 
@@ -196,7 +196,6 @@ openPopupProfile.addEventListener('click', () => {
 openPopupCards.addEventListener('click', () => {
     popupWithFormCards.open();
     formValidatorCards.clearErrors();
-    formValidatorCards._toggleButtonState();
 })
 
 

@@ -18,7 +18,7 @@
     }
 }
 
-.popup__input_value_name + .popup__input-error, .popup__input_value_place + .popup__input-error  {
+.popup__input_value_name + .popup__input-error, .popup__input_value_place + .popup__input-error, .popup__input_value_avatar + .popup__input-error  {
     top: 146px;
 }
 

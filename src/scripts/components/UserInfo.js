@@ -8,7 +8,6 @@ export default class UserInfo {
         return {
             userName: this._userName.textContent,
             userInfo: this._userInfo.textContent,
-            userAvatar: this._userAvatar.style.backgroundImage
         }
     }
     setUserInfo(formData) {
