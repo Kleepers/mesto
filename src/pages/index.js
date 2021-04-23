@@ -19,13 +19,10 @@ import {
     popupAvatarSelector,
     profileAvatar,
     profileAvatarSelector,
-    profileName,
-    profileDesc,
     popupDeleteSelector,
     popupProfileButton,
     popupAvatarButton,
     popupCardsButton,
-    popupDelete
 } from "../scripts/utils/constants.js";
 // классы
 
@@ -36,7 +33,6 @@ import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
 
 // классы Popup
-import Popup from "../scripts/components/Popup.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 
