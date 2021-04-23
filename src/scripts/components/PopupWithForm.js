@@ -3,7 +3,7 @@ import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
     constructor ({popupSelector, handleFormSubmit}){
         super(popupSelector);
-        this._handleFormSubmit = handleFormSubmit;
+        this.handleFormSubmit = handleFormSubmit;
         this._formSubmit = this._popupElement.querySelector('.popup__validation');
     }
 // сбор данных с input
@@ -20,7 +20,7 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
         this._popupElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._handleFormSubmit(this._getInputValues());
+            this.handleFormSubmit(this._getInputValues());
 
         })
     }

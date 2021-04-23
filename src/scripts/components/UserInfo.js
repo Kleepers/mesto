@@ -17,6 +17,6 @@ export default class UserInfo {
         this._userInfo.textContent = formData.userInfo;
     }
     setUserAvatar(formData) {
-        this._userAvatar.style.backgroundImage = `url(${formData.avatar})`;
+        this._userAvatar.style.backgroundImage = `url(${formData.userAvatar})`;
     }
 }

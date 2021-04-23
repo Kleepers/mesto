@@ -25,7 +25,6 @@ const popupAvatarSelector = '.popup_area_avatar';
 
 const profileName = document.querySelector(profileNameSelector);
 const profileDesc = document.querySelector(profileDescSelector);
-const userId = "e3c680abf4dc4407bc8365d5";
 
 const popupCardsButton = popupCards.querySelector('.popup__submit');
 const popupProfileButton = popupProfile.querySelector('.popup__submit');
@@ -34,4 +33,4 @@ const popupAvatarButton = popupAvatar.querySelector('.popup__submit');
 
 
 
-export {popupCardsButton,popupProfileButton,popupAvatarButton,userId,popupDeleteSelector,popupDelete,formDelete,profileDesc,profileName,profileAvatarSelector,profileAvatar,popupAvatarSelector,formAvatar,cardPlaceSelector,popupCardsSelector,popupProfileSelector,inputName, inputInfo, openPopupCards,openPopupProfile,cardPlace,formProfile,formCards,popupPhotoSelector,profileNameSelector,profileDescSelector,cardSelector};
+export {popupCardsButton,popupProfileButton,popupAvatarButton,popupDeleteSelector,popupDelete,formDelete,profileDesc,profileName,profileAvatarSelector,profileAvatar,popupAvatarSelector,formAvatar,cardPlaceSelector,popupCardsSelector,popupProfileSelector,inputName, inputInfo, openPopupCards,openPopupProfile,cardPlace,formProfile,formCards,popupPhotoSelector,profileNameSelector,profileDescSelector,cardSelector};
